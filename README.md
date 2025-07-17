@@ -1,9 +1,10 @@
-# SCX Text Extraction and Reinsertion Tools
+# SCX & PAK Extraction and Reinsertion Tools
 
 This tool was created by **gopicolo** for extracting and reinserting text in the game *Di Gi Charat Fantasy*.
 
-This repository contains two Python scripts designed to **extract** and **reinsert** Shift-JIS encoded text from `.SCX` files, used in *Di Gi Charat Fantasy*.  
-Works with both the Dreamcast and PS2 versions.
+This repository contains two sets of Python scripts:
+One set for working with .SCX text files (used in both Dreamcast and PS2 versions)
+Another for handling .PAK archive files from the PS2 version
 
 ## 🧰 Scripts Included
 
@@ -26,19 +27,41 @@ This script reads the edited `.txt` files from `output/` and reinserts the modif
 - Supports `<00>` tags (converted back to null bytes).
 - Ensures Shift-JIS encoding and null-terminated strings.
 
+📦 Scripts for .PAK Files (PS2 Version)
+The PAK/ folder contains scripts to extract and rebuild .PAK archives used in the PS2 version of Di Gi Charat Fantasy. These archives store binary resources like graphics, sounds, or sub-files.
+
+extract.py – Extract .PAK Archives
+Scans the input/ folder for all .PAK files.
+
+Extracts each archive into a corresponding subfolder inside extracted/.
+
+Automatically parses file tables, calculates offsets, and names extracted files properly.
+
+repack.py – Repack .PAK Archives
+Rebuilds .PAK files using the original archive as reference for file order and metadata.
+
+Reads each folder in extracted/ and generates a new .PAK file in the repacked/ folder.
+
+Keeps alignment to 2048-byte PS2 sector boundaries.
+
 ## 📁 Folder Structure
 
 ```
 project/
-├── input/       # Original .SCX files
-├── output/      # Extracted .txt files (also where you edit the text)
-├── modified/    # Output patched .SCX files
-├── dump.py      # Extract script
-└── inject.py    # Reinsert script
+├── input/         # Place your .SCX and .PAK files here
+├── output/        # Extracted .txt files from SCX
+├── modified/      # Repacked .SCX files
+├── extracted/     # Extracted contents of .PAK files
+├── repacked/      # Rebuilt .PAK files
+├── dump.py        # SCX text extractor
+├── inject.py      # SCX text reinserter
+└── PAK/
+    ├── extract.py # PAK archive extractor
+    └── repack.py  # PAK archive rebuilder
 ```
 
 ## ✅ How to Use
-
+For .SCX Files:
 1. Place your `.SCX` files in the `input/` folder.
 2. Run `dump.py` to extract text:
    ```bash
@@ -49,7 +72,12 @@ project/
    ```bash
    python inject.py
    ```
-
+For .PAK Files (PS2):
+1. Place all .PAK files in input/
+2. Run PAK/extract.py to extract
+3. Modify contents inside extracted/ folders
+4. Run PAK/repack.py to rebuild
+ 
 ## 📝 Notes
 
 - The tool assumes that text pointers begin at offset `0x08` in the `.SCX` file.
