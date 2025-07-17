@@ -27,7 +27,7 @@ This script reads the edited `.txt` files from `output/` and reinserts the modif
 - Supports `<00>` tags (converted back to null bytes).
 - Ensures Shift-JIS encoding and null-terminated strings.
 
-📦 Scripts for .PAK Files (PS2 Version)
+##📦 Scripts for .PAK Files (PS2 Version)
 The PAK/ folder contains scripts to extract and rebuild .PAK archives used in the PS2 version of Di Gi Charat Fantasy. These archives store binary resources like graphics, sounds, or sub-files.
 
 extract.py – Extract .PAK Archives
