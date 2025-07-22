@@ -48,11 +48,9 @@ Keeps alignment to 2048-byte PS2 sector boundaries.
 
 ```
 project/
-├── input/         # Place your .SCX and .PAK files here
+├── input/         # Place your .SCX files here
 ├── output/        # Extracted .txt files from SCX
 ├── modified/      # Repacked .SCX files
-├── extracted/     # Extracted contents of .PAK files
-├── repacked/      # Rebuilt .PAK files
 ├── dump.py        # SCX text extractor
 ├── inject.py      # SCX text reinserter
 └── PAK/
